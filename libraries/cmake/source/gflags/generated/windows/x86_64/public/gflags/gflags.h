@@ -345,7 +345,7 @@ extern GFLAGS_DLL_DECL void SetVersionString(const std::string& version);
 // of the first non-flag argument.
 // See top-of-file for more details on this function.
 #ifndef SWIG   // In swig, use ParseCommandLineFlagsScript() instead.
-extern GFLAGS_DLL_DECL uint32 ParseCommandLineFlags(int *argc, char*** argv, bool remove_flags);
+extern GFLAGS_DLL_DECL uint32 ParseCommandLineFlags(int *argc, const char*** argv, bool remove_flags);
 #endif
 
 
@@ -359,7 +359,7 @@ extern GFLAGS_DLL_DECL uint32 ParseCommandLineFlags(int *argc, char*** argv, boo
 // defined more than once in the command line or flag file, the last
 // definition is used.  Returns the index (into argv) of the first
 // non-flag argument.  (If remove_flags is true, will always return 1.)
-extern GFLAGS_DLL_DECL uint32 ParseCommandLineNonHelpFlags(int *argc, char*** argv, bool remove_flags);
+extern GFLAGS_DLL_DECL uint32 ParseCommandLineNonHelpFlags(int *argc, const char*** argv, bool remove_flags);
 
 // This is actually defined in gflags_reporting.cc.
 // This function is misnamed (it also handles --version, etc.), but
