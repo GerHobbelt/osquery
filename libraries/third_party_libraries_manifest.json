@@ -238,8 +238,8 @@
   "popt": {
     "product": "popt",
     "vendor": "popt_project",
-    "version": "1.16",
-    "commit": "abe4af616ffc0e22e54d691e73a67fabc267cc26",
+    "version": "1.19",
+    "commit": "916e61045d268f7e37ade5ec047eb77e8299e6ad",
     "ignored-cves": []
   },
   "rapidjson": {
@@ -273,8 +273,8 @@
   "thrift": {
     "product": "thrift",
     "vendor": "apache",
-    "version": "0.15.0",
-    "commit": "8317ec43ea2425b6f8e24e4dc4f5b2360f717eb4",
+    "version": "0.17.0",
+    "commit": "4d493e867b349f3475203ef9848353b315203c51",
     "ignored-cves": []
   },
   "util-linux": {
