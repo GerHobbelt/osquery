@@ -91,8 +91,8 @@
   "dbus": {
     "product": "d-bus",
     "vendor": "d-bus_project",
-    "version": "1.12.20",
-    "commit": "ab88811768f750777d1a8b9d9ab12f13390bfd3a",
+    "version": "1.12.24",
+    "commit": "5ff925648e88ba29cef7d708bc2bbc5d6de5fc48",
     "ignored-cves": []
   },
   "ebpfpub": {
@@ -203,8 +203,8 @@
   "librpm": {
     "product": "rpm",
     "vendor": "rpm",
-    "version": "4.17.0",
-    "commit": "3e74e8ba2dd5e76a5353d238dc7fc38651ce27b3",
+    "version": "4.18.0",
+    "commit": "ea0d77c52e176e2876fdb1d07ad41e9e2635a93e",
     "ignored-cves": []
   },
   "libudev": {
@@ -268,7 +268,7 @@
     "vendor": "sqlite",
     "version": "3.39.2",
     "commit": "cea3fbb89fb5dbf9a613964a3786867df17a0204",
-    "ignored-cves": []
+    "ignored-cves": ["CVE-2022-46908"]
   },
   "thrift": {
     "product": "thrift",
@@ -287,8 +287,8 @@
   "yara": {
     "product": "yara",
     "vendor": "virustotal",
-    "version": "4.1.3",
-    "commit": "b99a808cf9955090b909c72d6a0da5295c3cbc7c",
+    "version": "4.2.3",
+    "commit": "ba94b4f8ebb6d56786d14f6a0f7529b32d7c216f",
     "ignored-cves": []
   },
   "zlib": {
