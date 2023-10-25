@@ -92,7 +92,9 @@
     "vendor": "d-bus_project",
     "version": "1.12.24",
     "commit": "5ff925648e88ba29cef7d708bc2bbc5d6de5fc48",
-    "ignored-cves": []
+    "ignored-cves": [
+      "CVE-2023-34969"
+    ]
   },
   "ebpfpub": {
     "vendor": "trailofbits",
@@ -147,7 +149,9 @@
     "vendor": "libcap_project",
     "version": "2.59",
     "commit": "9eb56596eef5e55a596aa97ecaf8466ea559d05c",
-    "ignored-cves": []
+    "ignored-cves": [
+      "CVE-2023-2603"
+    ]
   },
   "libcryptsetup": {
     "product": "cryptsetup",
