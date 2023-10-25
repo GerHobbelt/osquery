@@ -142,7 +142,10 @@
     "vendor": "cryptsetup_project",
     "version": "1.7.5",
     "commit": "0ba577666c62bb3c82e90f3c8dd01f3f81a26cf4",
-    "ignored-cves": []
+    "ignored-cves": [
+      "CVE-2016-4484",
+      "CVE-2021-4122"
+    ]
   },
   "libdevmapper": {
     "product": "lvm2",
@@ -156,7 +159,7 @@
     "vendor": "debian",
     "version": "1.21.7",
     "commit": "e61f582015a9c67bbb3791cb93a864cfeb9c7151",
-    "ignored-cves": []
+    "ignored-cves": ["CVE-2022-1664"]
   },
   "libgcrypt": {
     "product": "libgcrypt",
