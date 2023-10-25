@@ -113,6 +113,7 @@ function(generateOsqueryTablesSystemSystemtable)
       darwin/battery.mm
       darwin/block_devices.cpp
       darwin/certificates.mm
+      darwin/connected_displays.mm
       darwin/cpu_info.cpp
       darwin/cpu_time.cpp
       darwin/crashes.cpp
@@ -140,7 +141,7 @@ function(generateOsqueryTablesSystemSystemtable)
       darwin/mounts.cpp
       darwin/nfs_shares.cpp
       darwin/nvram.cpp
-      darwin/os_version.cpp
+      darwin/os_version.mm
       darwin/packages.mm
       darwin/password_policy.cpp
       darwin/pci_devices.cpp
