@@ -65,7 +65,7 @@ TEST_F(PlistBenchmark, bench_parse_plist_content) {
 }
 
 int main(int argc, char* argv[]) {
-  google::ParseCommandLineFlags(&argc, &argv, true);
+  gflags::ParseCommandLineFlags(&argc, &argv, true);
   testing::InitGoogleTest(&argc, argv);
   google::InitGoogleLogging(argv[0]);
   return RUN_ALL_TESTS();
