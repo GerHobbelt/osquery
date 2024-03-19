@@ -23,7 +23,7 @@ class YumSourcesTests : public testing::Test {};
 TEST_F(YumSourcesTests, parse_empty_yum_conf) {
   QueryData results;
   std::string repos_dir;
-  const std::string& repo_file_name = "/etc/yum.conf"
+  const std::string& repo_file_name = "/etc/yum.conf";
   std::istringstream stream1("");
   parseYumConf(repo_file_name, stream1, results, repos_dir);
   // Default is used when no main.reposdir is set
@@ -34,7 +34,7 @@ TEST_F(YumSourcesTests, parse_empty_yum_conf) {
 TEST_F(YumSourcesTests, parse_yum_conf) {
   QueryData results;
   std::string repos_dir;
-  const std::string& repo_file_name = "/etc/local/yum.repos.d/example.repo"
+  const std::string& repo_file_name = "/etc/local/yum.repos.d/example.repo";
   std::istringstream stream2(R"STRLIT(
 # Some comment
 

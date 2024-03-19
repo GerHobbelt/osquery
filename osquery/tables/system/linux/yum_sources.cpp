@@ -40,7 +40,7 @@ void parseYumConf(const std::string& source_filename,
     }
 
     Row r;
-    r["source"] = source_filename
+    r["source"] = source_filename;
     for (auto it2 : it1.second) {
       // Option
       if ("baseurl" == it2.first || "enabled" == it2.first ||
