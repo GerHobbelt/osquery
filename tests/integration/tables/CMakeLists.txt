@@ -47,6 +47,7 @@ function(generateTestsIntegrationTablesTestsTest)
     hash.cpp
     interface_addresses.cpp
     interface_details.cpp
+    jetbrains_plugins.cpp
     listening_ports.cpp
     logged_in_users.cpp
     npm_packages.cpp
@@ -335,6 +336,7 @@ function(generateTestsIntegrationTablesTestsTest)
       deviceguard_status.cpp
       tpm_info.cpp
       security_profile_info.cpp
+      recent_files.cpp
     )
 
     if(OSQUERY_BUILD_ETW)
