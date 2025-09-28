@@ -179,6 +179,7 @@ function(generateTestsIntegrationTablesTestsTest)
       process_namespaces.cpp
       process_open_pipes.cpp
       rpm_package_files.cpp
+      deb_package_files.cpp
       rpm_packages.cpp
       selinux_events.cpp
       shadow.cpp
@@ -245,6 +246,7 @@ function(generateTestsIntegrationTablesTestsTest)
       managed_policies.cpp
       mdfind.cpp
       nfs_shares.cpp
+      system_profiler.cpp
       nvram.cpp
       package_bom.cpp
       package_install_history.cpp

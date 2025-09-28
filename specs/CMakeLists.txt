@@ -144,6 +144,7 @@ function(generateNativeTables)
     "darwin/sip_config.table:macos"
     "darwin/smc_keys.table:macos"
     "darwin/system_extensions.table:macos"
+    "darwin/system_profiler.table:macos"
     "darwin/temperature_sensors.table:macos"
     "darwin/time_machine_backups.table:macos"
     "darwin/time_machine_destinations.table:macos"
@@ -336,6 +337,7 @@ function(generateNativeTables)
   if(OSQUERY_BUILD_DPKG)
     list(APPEND platform_dependent_spec_files
       "linux/deb_packages.table:linux"
+      "linux/deb_package_files.table:linux"
     )
   endif()
 
