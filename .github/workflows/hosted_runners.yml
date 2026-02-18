@@ -265,13 +265,36 @@ jobs:
         os: [ubuntu-22.04]
 
     steps:
-    - name: Make space uninstalling packages
+    - name: Disk space information
+      shell: bash
+      run: |
+        df -h
+        free -m
+
+    - name: Make space -- uninstalling packages
       shell: bash
       run: |
         run_on_host="sudo nsenter -t 1 -m -u -n -i"
         packages_to_remove=$($run_on_host dpkg-query -f '${Package}\n' -W | grep "^clang-.*\|^llvm-.*\|^php.*\|^mono-.*\|^mongodb-.*\
-        \|^libmono-.*\|^temurin-8-jdk\|^temurin-11-jdk\|^temurin-17-jdk\|^dotnet-.*\|^google-chrome-stable\|^microsoft-edge-stable\|^google-cloud-sdk\|^firefox\|^hhvm\|^snapd")
+        \|^libmono-.*\|^temurin-8-jdk\|^temurin-11-jdk\|^temurin-17-jdk\|^dotnet-.*\|^google-chrome-stable\|^microsoft-edge-stable\
+        \|^google-cloud-sdk\|^google-cloud-api\|^azure-cli\|^firefox\|^php\|^hhvm\|^snapd")
         $run_on_host apt purge $packages_to_remove
+        $run_on_host apt autoremove -y
+        $run_on_host apt clean
+
+    - name: Make space -- removing runtimes
+      shell: bash
+      run: |
+        run_on_host="sudo nsenter -t 1 -m -u -n -i"
+        $run_on_host rm -rf /usr/local/lib/android
+        $run_on_host rm -rf /usr/share/dotnet
+        $run_on_host rm -rf /opt/ghc /usr/local/.ghcup
+
+    - name: Disk space information
+      shell: bash
+      run: |
+        df -h
+        free -m
 
     # Due to how the RPM packaging tools work, we have to adhere to some
     # character count requirements in the build path vs source path.
@@ -775,99 +798,11 @@ jobs:
         name: macos_unsigned_release_package_data_${{ matrix.architecture }}
         path: ${{ steps.packages.outputs.REL_UNSIGNED_RELEASE_PACKAGE_DATA_PATH }}
 
-    - name: Package the tests for older x86_64 macOS workers
-      if: matrix.architecture == 'x86_64' && matrix.os == 'macos-14'
-      working-directory: ${{ github.workspace }}/workspace
-      run: |
-        mkdir macos_tests_${{ matrix.build_type }}
-        ${{ steps.build_paths.outputs.SOURCE }}/tools/ci/scripts/macos/package_tests.sh build macos_tests_${{ matrix.build_type }} ${{ matrix.architecture }}
-
-    - name: Store the packaged tests for older x86_64 macOS workers
-      if: matrix.architecture == 'x86_64' && matrix.os == 'macos-14'
-      uses: actions/upload-artifact@v4.4.0
-      with:
-        name: macos_tests_${{ matrix.build_type }}
-        path: workspace/macos_tests_${{ matrix.build_type }}.tar.gz
-
     # Before we terminate this job, delete the build folder. The cache
     # actions will require the disk space to create the archives.
     - name: Reclaim disk space
       run: |
         rm -rf ${{ steps.build_paths.outputs.BINARY }}
-
-
-
-
-  # This job takes the packaged tests (Release + Debug) from the latest macos
-  # builder and runs them on the previous available macOS versions
-  test_older_macos:
-
-    needs: build_macos
-
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        python_architecture: [x64]
-        os: [macos-13]
-
-    steps:
-      - name: Clone the osquery repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - uses: actions/download-artifact@v4.1.7
-        with:
-          name: macos_tests_Release
-
-      - uses: actions/download-artifact@v4.1.7
-        with:
-          name: macos_tests_Debug
-
-      - name: Setup python
-        uses: actions/setup-python@v5
-        with:
-          # Pin an exact python version to avoid mismatches between the builder and this test_older_macos runner
-          python-version: '3.13.1'
-          architecture: ${{ matrix.python_architecture }}
-
-      - name: Install tests dependencies
-        id: install_test_deps
-        run: |
-          pip3 install setuptools \
-                        pexpect==3.3 \
-                        psutil \
-                        timeout_decorator \
-                        six \
-                        thrift==0.11.0 \
-                        osquery
-
-      - name: Install CMake
-        shell: bash
-        run: |
-          mkdir -p "workspace/downloads" \
-                   "workspace/install"
-
-          ./tools/ci/scripts/macos/install_cmake.sh \
-            "workspace/downloads" \
-            "workspace/install" \
-            "3.21.4"
-
-      - name: Extract the tests
-        run: |
-          tar xzf macos_tests_Release.tar.gz
-          tar xzf macos_tests_Debug.tar.gz
-
-      - name: Run the Debug tests
-        run: |
-          ( cd macos_tests_Debug && ./run.sh )
-
-      - name: Run the Release tests
-        run: |
-          ( cd macos_tests_Release && ./run.sh )
-
-
 
 
   # This job builds the universal macOS artifacts
@@ -1120,12 +1055,6 @@ jobs:
                               thrift==0.11.0 `
                               osquery `
                               pywin32
-
-    - name: Install Strawberry Perl
-      working-directory: ${{ steps.build_paths.outputs.SOURCE }}
-      shell: powershell
-      run: |
-        tools\ci\scripts\install_openssl_formula_dependencies.ps1
 
     # TODO: Implement a cache so we don't keep hitting the server at each run
     - name: Install CMake
