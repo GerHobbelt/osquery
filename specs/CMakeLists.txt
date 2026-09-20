@@ -191,6 +191,7 @@ function(generateNativeTables)
     "linux/seccomp_events.table:linux"
     "linux/selinux_events.table:linux"
     "linux/selinux_settings.table:linux"
+    "linux/secureboot_certificates.table:linux"
     "linux/shadow.table:linux"
     "linux/shared_memory.table:linux"
     "linux/syslog_events.table:linux"
@@ -312,6 +313,7 @@ function(generateNativeTables)
     "windows/tpm_info.table:windows"
     "windows/security_profile_info.table:windows"
     "windows/windows_search.table:windows"
+    "windows/process_open_handles.table:windows"
   )
 
   if(OSQUERY_BUILD_BPF)
