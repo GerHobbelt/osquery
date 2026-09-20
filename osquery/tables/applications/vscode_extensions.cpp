@@ -38,6 +38,10 @@ const std::vector<std::pair<std::string, std::string>> KPathList = {
     {".cursor-server", "cursor"},
     {".windsurf", "windsurf"},
     {".windsurf-server", "windsurf"},
+    // Windsurf was rebranded to Devin Desktop in June 2026. New installs
+    // write extensions under .devin instead of .windsurf; the legacy path
+    // above is still read for machines that haven't been touched since.
+    {".devin", "windsurf"},
     {".trae", "trae"},
     {".trae-server", "trae"},
 };
@@ -100,7 +104,7 @@ void genReadJSONAndAddExtensionRows(const std::string& uid,
     // present and in every example checked, metadata.id is present and has the
     // same value (on Windows, macOS, and Linux and multiple VSCode forks)
     it = metadata.FindMember("id");
-    if (it != identifier.MemberEnd() && it->value.IsString()) {
+    if (it != metadata.MemberEnd() && it->value.IsString()) {
       r["uuid"] = it->value.GetString();
     }
 
